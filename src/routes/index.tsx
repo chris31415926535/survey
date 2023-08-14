@@ -6,8 +6,8 @@ import {
 } from "solid-start/server";
 import { getUser, logout } from "~/db/session";
 
-import { surveyFormat } from "~/db/surveyformat";
-console.log(surveyFormat);
+//import { surveyFormat } from "~/db/surveyformat";
+//console.log(surveyFormat);
 
 export function routeData() {
   return createServerData$(async (_, { request }) => {

@@ -12,6 +12,8 @@ import {
   Title,
 } from "solid-start";
 import "./root.css";
+import { SurveyProvider } from "./components/surveyStateContext";
+
 
 export default function Root() {
   return (
@@ -22,13 +24,21 @@ export default function Root() {
         <Meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Body>
+      
         <ErrorBoundary>
+        
           <Suspense fallback={<div>Loading</div>}>
+            
             <Routes>
+            <SurveyProvider>
               <FileRoutes />
+              </SurveyProvider>
             </Routes>
+            
           </Suspense>
+          
         </ErrorBoundary>
+        
         <Scripts />
       </Body>
     </Html>

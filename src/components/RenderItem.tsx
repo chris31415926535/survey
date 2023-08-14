@@ -1,5 +1,6 @@
 import { For, JSXElement } from "solid-js";
 import { SurveyItem } from "../db/surveyformat"
+import { setState, state } from "~/db/surveyformat";
 
 export default function RenderItem(props: {item : SurveyItem}){
 
@@ -22,8 +23,13 @@ export default function RenderItem(props: {item : SurveyItem}){
         </div>;
     }
 
+    let itemText = props.item.text!.filter((i) => i.lang === state.userLangage)[0] ;
+    console.log(itemText)
+    //props.item.text!.map((i) => console.log(i))// Object.keys(i) === [state.userLangage]) ;
+ //<div innerHTML = {props.item.text}></div>
     return(<>
-    <div innerHTML = {props.item.text}></div>
+   
+    <div innerHTML = {itemText.textLocalized}></div>
     {questionHTML} 
     <hr/>
     </>

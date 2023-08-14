@@ -10,7 +10,7 @@ import {
 import RenderItem from "~/components/RenderItem";
 import { db } from "~/db";
 import { createUserSession, getUser, login, register } from "~/db/session";
-import { setState, state, surveyFormat } from "~/db/surveyformat";
+//import { setState, state, surveyFormat } from "~/db/surveyformat";
 
 function validateUsername(username: unknown) {
   if (typeof username !== "string" || username.length < 3) {
