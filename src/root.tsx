@@ -1,6 +1,7 @@
 // @refresh reload
 import { Suspense } from "solid-js";
 import {
+  A,
   Body,
   ErrorBoundary,
   FileRoutes,
@@ -28,9 +29,11 @@ export default function Root() {
         <ErrorBoundary>
         
           <Suspense fallback={<div>Loading</div>}>
-            
+          
+            <A href="/Survey">Survey</A>
             <Routes>
             <SurveyProvider>
+
               <FileRoutes />
               </SurveyProvider>
             </Routes>

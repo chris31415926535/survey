@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell,
   'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -7,18 +7,23 @@ main {
   width: 50%;
   margin: 0 auto;
   border-radius: 1rem;
-  background: #eeffff;
+  background: #FFFFFF;
   padding: 1rem;
   flex-direction: column;
 }
 
 h1 {
   margin: 0;
+
+}
+
+hr {
+  border: solid 0.5px grey;
+  width: 96%;
 }
 
 p {
   margin: 0 0 0.3rem 0;
-  color: #f87171;
   flex-basis: 100%;
 }
 
@@ -57,4 +62,4 @@ button {
   width: 100%;
 }
 
-
+ */

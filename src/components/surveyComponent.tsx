@@ -2,24 +2,26 @@ import { For, Show } from "solid-js";
 import { SurveyProvider, useSurveyContext } from "./surveyStateContext";
 import RenderItemContext from "./RenderItemContext";
 
+import { writeFile } from "fs";
+import { AddRandomQuestion } from "./AddRandomQuestion";
 
 
 export const SurveyComponent = () => {
 
     // get our global context values
     const context = useSurveyContext();
-    console.log(context)
+    //console.log(context)
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
 
     const [surveyFormat, getState, setState] = context;
 
     function updateResponses() {
-        console.log(getState)
+        // console.log(getState)
         for (let itemIndex in getState.surveyFormat.pages[getState.currentPage]) {
 
             let value;
             let item = getState.surveyFormat.pages[getState.currentPage][itemIndex];
-            console.log(item.type)
+            //   console.log(item.type)
 
             if (item.type === "text_box") {
                 let htmlItem = document.getElementById(item.id) as HTMLInputElement;
@@ -42,6 +44,7 @@ export const SurveyComponent = () => {
 
     }
 
+
     return (<>
         <select name="languages" id="language-select" onChange={
             (e) => {
@@ -58,50 +61,56 @@ export const SurveyComponent = () => {
             The page is {getState.currentPage}
         </div>
         <div>
-            The language is { getState.userLanguage}
+            The language is {getState.userLanguage}
         </div>
 
         <For each={getState.surveyFormat.pages[getState.currentPage]}   >
             {(item) => <RenderItemContext item={item} />}
         </For>
 
-        
-             <Show when={(getState.currentPage > 0)} fallback={<button disabled={true}>previous page</button>}>
-                 <button onClick={() => {
 
-                     // update saved responses
-                     updateResponses();
+        <Show when={(getState.currentPage > 0)} fallback={<button disabled={true}>previous page</button>}>
+            <button onClick={() => {
 
-                     if (getState.currentPage > 0) {
-                         setState("currentPage", c => c - 1);
-                         console.log("page " + getState.currentPage)
-                     }
+                // update saved responses
+                updateResponses();
 
-                 }}>
-                     previous page
-                 </button>
-             </Show>
+                if (getState.currentPage > 0) {
+                    setState("currentPage", c => c - 1);
+                    //  console.log("page " + getState.currentPage)
+                }
 
-             <Show when={(getState.currentPage < getState.maxPages - 1)} fallback={<button disabled={true}>next page</button>}>
-                 <button onClick={() => {
+            }}>
+                previous page
+            </button>
+        </Show>
 
-                     // update saved responses
-                     updateResponses();
+        <Show when={(getState.currentPage < getState.maxPages - 1)}
+            fallback={
+                <button disabled = {true}>
+                    Submit
+                </button>}>
+            <button onClick={() => {
 
-                     // now change page if we should
+                // update saved responses
+                updateResponses();
 
-                     if (getState.currentPage < getState.maxPages - 1) {
+                // now change page if we should
 
-                         setState("currentPage", c => c + 1);
-                         console.log("page " + getState.currentPage)
-                     }
+                if (getState.currentPage < getState.maxPages - 1) {
 
-                 }}>
-                     next page
-                 </button>
-             </Show>
+                    setState("currentPage", c => c + 1);
+                    //  console.log("page " + getState.currentPage)
+                }
 
-             <button onClick={() => console.log(getState)}>log state</button>
+            }}>
+                next page
+            </button>
+        </Show>
+
+        <AddRandomQuestion />
+
+        <button onClick={() => console.log(getState)}>log state</button>
     </>)
 
 }

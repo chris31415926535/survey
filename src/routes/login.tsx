@@ -7,10 +7,10 @@ import {
   createServerData$,
   redirect,
 } from "solid-start/server";
-import RenderItem from "~/components/RenderItem";
+
+
 import { db } from "~/db";
 import { createUserSession, getUser, login, register } from "~/db/session";
-//import { setState, state, surveyFormat } from "~/db/surveyformat";
 
 function validateUsername(username: unknown) {
   if (typeof username !== "string" || username.length < 3) {
@@ -94,39 +94,11 @@ export default function Login() {
     }
   });
 
-  function updateResponses() {
-    for (let itemIndex in state.surveyFormat.pages[state.currentPage]) {
-
-      let value;
-      let item = state.surveyFormat.pages[state.currentPage][itemIndex];
-      console.log(item.type)
-
-      if (item.type === "text_box") {
-        let htmlItem = document.getElementById(item.id) as HTMLInputElement;
-        value = htmlItem.value;
-        setState("surveyFormat", "pages", state.currentPage, Number(itemIndex), "response", value);
-        console.log(value)
-      }
-
-      // if multiple choice, find out which button is selected
-      if (item.type === "multiple_choice") {
-        let radioButtons = document.getElementsByName(item.id)!;
-        for (let i in radioButtons) {
-          if ((radioButtons[i] as HTMLInputElement).checked) {
-            value = (radioButtons[i] as HTMLInputElement).value;
-            setState("surveyFormat", "pages", state.currentPage, Number(itemIndex), "response", value);
-          }
-        }
-
-      }
-    }
-
-  }
 
 
   return (
     <>
-      {/* <main>
+      <main>
       <h1>Login</h1>
       <Form>
         <input
@@ -136,7 +108,7 @@ export default function Login() {
         />
         
         <fieldset>
-          <legend>Login or Regiter?</legend>
+          <legend>Login or Register?</legend>
           
           <label>
             <input type="radio" name="loginType" value="login" checked={true} />{" "}
@@ -167,46 +139,8 @@ export default function Login() {
         </Show>
         <button type="submit">{data() ? "Login" : ""}</button>
       </Form>
-    </main> */}
+    </main>
 
-
-      <For each={state.surveyFormat.pages[state.currentPage]}   >
-        {(item) => <RenderItem item={item} />}
-      </For>
-
-      <Show when={(state.currentPage > 0)} fallback={<button disabled={true}>previous page</button>}>
-        <button onClick={() => {
-
-          // update saved responses
-          updateResponses();
-
-          if (state.currentPage > 0) {
-            setState("currentPage", c => c - 1);
-            console.log("page " + state.currentPage)
-          }
-
-        }}>
-          previous page
-        </button>
-      </Show>
-      <Show when={(state.currentPage < state.maxPages - 1)} fallback={<button disabled={true}>next page</button>}>
-        <button onClick={() => {
-
-          // update saved responses
-          updateResponses();
-
-          // now change page if we should
-
-          if (state.currentPage < state.maxPages - 1) {
-
-            setState("currentPage", c => c + 1);
-            console.log("page " + state.currentPage)
-          }
-
-        }}>
-          next page
-        </button>
-      </Show>
 
     </>
   );

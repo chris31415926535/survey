@@ -1,4 +1,4 @@
-import { useRouteData } from "solid-start";
+import { Navigate, useRouteData } from "solid-start";
 import {
   createServerAction$,
   createServerData$,
@@ -6,15 +6,12 @@ import {
 } from "solid-start/server";
 import { getUser, logout } from "~/db/session";
 
-//import { surveyFormat } from "~/db/surveyformat";
-//console.log(surveyFormat);
-
 export function routeData() {
   return createServerData$(async (_, { request }) => {
     const user = await getUser(request);
 
     if (!user) {
-      throw redirect("/login");
+      // throw redirect("/login");
     }
 
     return user;
@@ -26,6 +23,8 @@ export default function Home() {
   const [, { Form }] = createServerAction$((f: FormData, { request }) =>
     logout(request)
   );
+
+  return <Navigate href="/survey" />;
 
   return (
     <main class="w-full p-4 space-y-2">

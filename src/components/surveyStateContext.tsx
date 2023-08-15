@@ -53,29 +53,33 @@ export type SurveyState = {
 }
 
 export const surveyFormat: SurveyFormat = {
-    "languages": [ "EN", "FR" ],
+    "languages": [ "EN", "FR", "ES" ],
     "pages": [
         [{
                 "id": "Q0",
                 "type": "html_text",
                 "text": [{lang: "EN", textLocalized : "<p><em>Welcome</em> to this amazing stupid demo!</p>"},
-                         {lang: "FR", textLocalized : "<p>Bienvenue!</p>"}]
+                         {lang: "FR", textLocalized : "<p>Bienvenue!</p>"},
+                        {lang: "ES", textLocalized : "¡Bienvenido a esta asombrosa y estúpida demostración!"}]
             }, {
                 "id": "Q1",
                 "type": "multiple_choice",
                 "text": [{lang: "EN", textLocalized: "How often do you imagine writing your own survey software?"},
-                         {lang: "FR", textLocalized: "Combien de fois avez-vous imaginé écrire votre propre logiciel d'enquête ?"}],
+                         {lang: "FR", textLocalized: "Combien de fois avez-vous imaginé écrire votre propre logiciel d'enquête ?"},
+                        {lang: "ES", textLocalized: "¿Con qué frecuencia se imagina escribiendo su propio software de encuestas?"}],
                          
                          "choices": [
                             { lang: "EN", choicesLocalized: ["Never", "Sometimes", "Always"] },
-                            { lang: "FR", choicesLocalized: ["Jamais", "De temps en temps", "Toujours"] }
+                            { lang: "FR", choicesLocalized: ["Jamais", "De temps en temps", "Toujours"] },
+                            { lang: "ES", choicesLocalized: ["Nunca", "A veces", "Siempre"]}
                         ],
                 "required": "true"
             }, {
                 "id": "Q2",
                 "type": "text_box",
                 "text": [{lang: "EN", textLocalized: "Say something nice!"},
-                         {lang: "FR", textLocalized: "Disez quelque-choise de gentil!"}],
+                         {lang: "FR", textLocalized: "Disez quelque-choise de gentil!"},
+                        {lang: "ES", textLocalized: "¡Di algo agradable!"}],
                          
                 "required": "true"
             }
@@ -84,17 +88,28 @@ export const surveyFormat: SurveyFormat = {
             "id": "Q3",
             "type": "html_text",
             "text": [{lang: "EN", textLocalized : "<p>This is the second page!</p>"},
-                     {lang: "FR", textLocalized : "<p>Voici la deuxieme page!</p>"}]
+                     {lang: "FR", textLocalized : "<p>Voici la deuxieme page!</p>"},
+                    {lang: "ES", textLocalized : "¡Esta es la segunda página!"}]
         }, {
             "id": "Q4",
             "type": "multiple_choice",
             "text": [{lang: "EN", textLocalized: "Did you think this would work?"},
-                     {lang: "FR", textLocalized: "Pensait-vous que ça marcherait?"}],
+                     {lang: "FR", textLocalized: "Pensait-vous que ça marcherait?"},
+                    {lang: "ES", textLocalized: "¿Pensaste que esto funcionaría?"}],
                      
                      "choices": [
                         { lang: "EN", choicesLocalized: ["Never", "Sometimes", "Always"] },
-                        { lang: "FR", choicesLocalized: ["Jamais", "De temps en temps", "Toujours"] }
+                        { lang: "FR", choicesLocalized: ["Jamais", "De temps en temps", "Toujours"] },
+                        { lang: "ES", choicesLocalized: ["Nunca", "A veces", "Siempre"]}
                     ],
+            "required": "true"
+        }, {
+            "id": "Q5",
+            "type": "text_box",
+            "text": [{lang: "EN", textLocalized: "Your responses are saved between pages and language changes! How do you feel about that?"},
+                     {lang: "FR", textLocalized: "Vos réponses sont enregistrées entre les pages et les changements de langue ! Comment te sens tu à propos de ça?"},
+                    {lang: "ES", textLocalized: "¡Tus respuestas se guardan entre páginas y cambios de idioma! ¿Cómo te sientes sobre eso?"}],
+                     
             "required": "true"
         }
     ]

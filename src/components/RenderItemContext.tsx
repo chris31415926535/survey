@@ -1,14 +1,15 @@
 import { For, JSXElement, createEffect } from "solid-js";
-import { SurveyItem } from "../db/surveyformat"
+//import { SurveyItem } from "../db/surveyformat"
 //import { setgetState, state } from "~/db/surveyformat";
-import { SurveyProvider, useSurveyContext } from "./surveyStateContext";
+import { SurveyItem, SurveyProvider, useSurveyContext } from "./surveyStateContext";
 import { setDefaultResultOrder } from "dns";
 
 export default function RenderItem(props: { item: SurveyItem }) {
+    //export default function RenderItem(props: { item: any }) {
 
     // get our global context values
     const context = useSurveyContext();
-    console.log(context)
+   // console.log(context)
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
 
     const [surveyFormat, getState, setState] = context;
@@ -16,9 +17,11 @@ export default function RenderItem(props: { item: SurveyItem }) {
     let questionHTML: JSXElement = <></>;
 
     if (props.item.type == "multiple_choice") {
+        if (props.item.choices === undefined) return (<div>Invalid multiple choice</div>);
+        
 
         // get English values for internal DOM value property 
-        const englishChoices = (props.item.choices || { lang: "EN", choicesLocalized: ["No choices found"] }).filter((e: any) => e.lang === "EN")[0].choicesLocalized;
+        const englishChoices = (props.item.choices || [{ lang: "EN", choicesLocalized: ["No choices found"] }]).filter((e: any) => e.lang === "EN")[0].choicesLocalized;
 
 
         questionHTML = <div id={props.item.id}>
@@ -32,6 +35,9 @@ export default function RenderItem(props: { item: SurveyItem }) {
                             name={props.item.id}
                             id={props.item.id + englishChoices[index()]}
                             value={englishChoices[index()]}
+                            // to look into: consider making respones an array of objects so we can filter()
+                            // and potentially fix that type error
+                            // although that might make it more awkward to setState()
                             checked={getState.responses[props.item.id] === englishChoices[index()]}
                             //onClick = {() => props.item.response = englishChoices[index()]} 
                             onClick={(e) => setState("responses", props.item.id, englishChoices[index()])}
@@ -68,22 +74,17 @@ export default function RenderItem(props: { item: SurveyItem }) {
             id={props.item.id} 
             name={props.item.id} 
             value={props.item.response || ""} 
-            onChange = {(e) => setState("responses", props.item.id, e.target.value)}
+            onChange = {(e) => setState("responses", props.item.id, e.target.value )}
             />
         </div>;
     }
 
     // get localized language text in derived signal
     const itemText = () => {
-        const result = props.item.text!.filter((i) => i.lang === getState.userLanguage)[0];
-        console.log(props.item)
+        const result = props.item.text!.filter((i: any) => i.lang === getState.userLanguage)[0];
         return (result.textLocalized);
     }
 
-    //let itemText = props.item.text!.filter((i) => i.lang === getState.userLanguage)[0] ;
-    // console.log(itemText())
-    //props.item.text!.map((i) => console.log(i))// Object.keys(i) === [state.userLanguage]) ;
-    //<div innerHTML = {props.item.text}></div>
     return (
         <div style={"flex-direction:column"}>
             <div innerHTML={itemText()}></div>
