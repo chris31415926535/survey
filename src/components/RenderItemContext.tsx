@@ -1,6 +1,4 @@
 import { For, JSXElement, createEffect } from "solid-js";
-//import { SurveyItem } from "../db/surveyformat"
-//import { setgetState, state } from "~/db/surveyformat";
 import { SurveyItem, SurveyProvider, useSurveyContext } from "./surveyStateContext";
 import { setDefaultResultOrder } from "dns";
 
