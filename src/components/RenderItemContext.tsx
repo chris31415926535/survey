@@ -39,7 +39,6 @@ export default function RenderItem(props: { item: SurveyItem }) {
                             // and potentially fix that type error
                             // although that might make it more awkward to setState()
                             checked={getState.responses[props.item.id] === englishChoices[index()]}
-                            //onClick = {() => props.item.response = englishChoices[index()]} 
                             onClick={(e) => setState("responses", props.item.id, englishChoices[index()])}
                         />
 
@@ -55,25 +54,12 @@ export default function RenderItem(props: { item: SurveyItem }) {
     }
 
 
-    // if (props.item.type == "multiple_choice") {
-    //     questionHTML = <div id={props.item.id}>
-    //         <For each={props.item.choices} fallback={<div>No items</div>}>
-    //             {(item) => (
-    //                 <div>
-    //                     <input type="radio" name={props.item.id} id={props.item.id + item} value={item} checked={props.item.response === item} />
-    //                     <label for={props.item.id + item}>{item}</label>
-    //                 </div>
-    //             )}
-    //         </For>
-    //     </div>;
-    // }
-
     if (props.item.type == "text_box") {
         questionHTML = <div>
             <input type="text" 
             id={props.item.id} 
             name={props.item.id} 
-            value={props.item.response || ""} 
+            value={getState.responses[props.item.id] || ""} 
             onChange = {(e) => setState("responses", props.item.id, e.target.value )}
             />
         </div>;

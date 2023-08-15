@@ -11,6 +11,7 @@ export function routeData() {
     const user = await getUser(request);
 
     if (!user) {
+      // disabling the login redirect functionality
       // throw redirect("/login");
     }
 
@@ -24,6 +25,7 @@ export default function Home() {
     logout(request)
   );
 
+  // all we do here is redirect to the survey page
   return <Navigate href="/survey" />;
 
   return (
