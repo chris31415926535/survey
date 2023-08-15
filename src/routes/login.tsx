@@ -1,3 +1,5 @@
+// NOTE: I used the solidstart template with user auth, but have disabled it all
+
 import { For, Show } from "solid-js";
 import { produce } from "solid-js/store";
 import { useParams, useRouteData } from "solid-start";

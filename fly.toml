@@ -1,0 +1,17 @@
+# fly.toml app configuration file generated for solidstart-survey-test on 2023-08-15T16:55:40Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "solidstart-survey-test"
+primary_region = "yul"
+
+[build]
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]

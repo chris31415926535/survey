@@ -24,7 +24,7 @@ export type SurveyItem = {
     choices?: ChoicesText;
     required?: string;
     validationType?: string;
-    response?: string;
+    response?: string; // TODO: consider removing, to separate hard-coded survey features from user responses
 }
 
 // a page is an array of items
@@ -60,7 +60,7 @@ export const surveyFormat: SurveyFormat = {
                 "type": "html_text",
                 "text": [{lang: "EN", textLocalized : "<p><em>Welcome</em> to this amazing stupid demo!</p>"},
                          {lang: "FR", textLocalized : "<p>Bienvenue!</p>"},
-                        {lang: "ES", textLocalized : "¡Bienvenido a esta asombrosa y estúpida demostración!"}]
+                        {lang: "ES", textLocalized : "<p>¡Bienvenido a esta asombrosa y estúpida demostración!</p>"}]
             }, {
                 "id": "Q1",
                 "type": "multiple_choice",
@@ -89,7 +89,7 @@ export const surveyFormat: SurveyFormat = {
             "type": "html_text",
             "text": [{lang: "EN", textLocalized : "<p>This is the second page!</p>"},
                      {lang: "FR", textLocalized : "<p>Voici la deuxieme page!</p>"},
-                    {lang: "ES", textLocalized : "¡Esta es la segunda página!"}]
+                    {lang: "ES", textLocalized : "<p>¡Esta es la segunda página!</p>"}]
         }, {
             "id": "Q4",
             "type": "multiple_choice",
