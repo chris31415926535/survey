@@ -102,26 +102,7 @@ export const AddRandomQuestion = () => {
         const numQuestions = questionBank.length;
         const index = Math.floor(Math.random() * numQuestions);
 
-        // try many ways to get a deep copy of a random question that we
-        // can manipulate without changing either the original question bank 
-        // or the signal store
-
-        // older way, didn't work!
-        // let newQuestionBank = questionBank.slice();
-
-        // ES6 way, didn't work!
-        // let newQuestionBank = [...questionBank];
-
-        //Array way, didn't work!
-        //let newQuestionBank = Array.from(questionBank);
-
-        // stupid for loop way, didn't work!
-        // let newQuestionBank: any[] = [];
-        // for (let i in questionBank) {
-        //     newQuestionBank[i] = questionBank[i];
-        // }
-
-        // even stupider json way, the only way that worked!! so stupid!!
+        // stupidly, the only way to make a deep copy that worked!! so stupid!!
         let newQuestionBank = JSON.parse(JSON.stringify(questionBank));
 
         let newQuestion = newQuestionBank[index];

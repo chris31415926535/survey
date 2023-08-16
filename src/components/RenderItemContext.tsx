@@ -3,11 +3,10 @@ import { SurveyItem, SurveyProvider, useSurveyContext } from "./surveyStateConte
 import { setDefaultResultOrder } from "dns";
 
 export default function RenderItem(props: { item: SurveyItem }) {
-    //export default function RenderItem(props: { item: any }) {
 
     // get our global context values
     const context = useSurveyContext();
-   // console.log(context)
+    // console.log(context)
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
 
     const [surveyFormat, getState, setState] = context;
@@ -16,14 +15,14 @@ export default function RenderItem(props: { item: SurveyItem }) {
 
     if (props.item.type == "multiple_choice") {
         if (props.item.choices === undefined) return (<div>Invalid multiple choice</div>);
-        
+
 
         // get English values for internal DOM value property 
-        const englishChoices = (props.item.choices || [{ lang: "EN", choicesLocalized: ["No choices found"] }]).filter((e: any) => e.lang === "EN")[0].choicesLocalized;
+        const englishChoices = (props.item.choices || [{ lang: "EN", choicesLocalized: ["No choices found"] }]).filter((e) => e.lang === "EN")[0].choicesLocalized;
 
 
         questionHTML = <div id={props.item.id}>
-            <For each={props.item.choices.filter((e: any) => e.lang === getState.userLanguage)[0].choicesLocalized} fallback={<div>No items</div>}>
+            <For each={props.item.choices.filter((e) => e.lang === getState.userLanguage)[0].choicesLocalized} fallback={<div>No items</div>}>
                 {(item, index) => (
 
                     <div style={"flex-direction:row"}>
@@ -54,18 +53,18 @@ export default function RenderItem(props: { item: SurveyItem }) {
 
     if (props.item.type == "text_box") {
         questionHTML = <div>
-            <input type="text" 
-            id={props.item.id} 
-            name={props.item.id} 
-            value={getState.responses[props.item.id] || ""} 
-            onChange = {(e) => setState("responses", props.item.id, e.target.value )}
+            <input type="text"
+                id={props.item.id}
+                name={props.item.id}
+                value={getState.responses[props.item.id] || ""}
+                onChange={(e) => setState("responses", props.item.id, e.target.value)}
             />
         </div>;
     }
 
     // get localized language text in derived signal
     const itemText = () => {
-        const result = props.item.text!.filter((i: any) => i.lang === getState.userLanguage)[0];
+        const result = props.item.text!.filter((i) => i.lang === getState.userLanguage)[0];
         return (result.textLocalized);
     }
 

@@ -13,7 +13,7 @@ export const SurveyComponent = () => {
 
     const [surveyFormat, getState, setState] = context;
 
-     return (<>
+    return (<>
         <select name="languages" id="language-select" onChange={
             (e) => {
                 setState("userLanguage", e.target.value);
@@ -53,17 +53,17 @@ export const SurveyComponent = () => {
 
         <Show when={(getState.currentPage < getState.maxPages - 1)}
             fallback={
-                <button disabled = {true}>
+                <button disabled={true}>
                     Submit
                 </button>}>
             <button onClick={() => {
 
                 // TODO: validation
-         
-                // TODO: update saved responses to external storage
-                 //updateResponses();
 
-                 // TODO: display logic (e.g. should we skip the next page? which page are we going to?)
+                // TODO: update saved responses to external storage
+                //updateResponses();
+
+                // TODO: display logic (e.g. should we skip the next page? which page are we going to?)
 
                 // now change page if we should
                 if (getState.currentPage < getState.maxPages - 1) {
