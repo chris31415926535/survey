@@ -89,7 +89,7 @@ export const AddRandomQuestion = () => {
     const context = useSurveyContext();
     // console.log(context)
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
-    const [surveyFormat, getState, setState] = context;
+    const [, getState, setState] = context;
 
 
 
@@ -103,9 +103,9 @@ export const AddRandomQuestion = () => {
         const index = Math.floor(Math.random() * numQuestions);
 
         // stupidly, the only way to make a deep copy that worked!! so stupid!!
-        let newQuestionBank = JSON.parse(JSON.stringify(questionBank));
+        const newQuestionBank = JSON.parse(JSON.stringify(questionBank));
 
-        let newQuestion = newQuestionBank[index];
+        const newQuestion = newQuestionBank[index];
 
         // give it a random id that we will use for DOM id etc.
         newQuestion.id = String(Math.random());

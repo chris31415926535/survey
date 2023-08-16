@@ -1,6 +1,5 @@
-import { Accessor, JSX, ParentComponent, Setter, createContext, createSignal, useContext } from "solid-js";
+import { ParentComponent, createContext, useContext } from "solid-js";
 import { SetStoreFunction, createStore } from "solid-js/store";
-import { Properties } from "solid-js/web";
 
 
 // this is for arbitrary {["EN" : "text", "FR" : "text"]} etc
@@ -126,8 +125,8 @@ type ContextProps = [
 
 
 const initialResponses: Record<string, string> = {};
-for (let page of surveyFormat.pages) {
-    for (let item of page) {
+for (const page of surveyFormat.pages) {
+    for (const item of page) {
         if (item.type !== "html_text") initialResponses[`${item.id}`] = ""
     }
 }

@@ -1,8 +1,8 @@
-let users = [{ id: 0, username: "kody", password: "twixrox" }];
+const users = [{ id: 0, username: "kody", password: "twixrox" }];
 export const db = {
   user: {
     async create({ data }: { data: { username: string; password: string } }) {
-      let user = { ...data, id: users.length };
+      const user = { ...data, id: users.length };
       users.push(user);
       return user;
     },

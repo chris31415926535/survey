@@ -9,7 +9,10 @@
   "devDependencies": {
     "@types/babel__core": "^7.20.1",
     "@types/node": "^18.16.19",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
     "esbuild": "^0.14.54",
+    "eslint": "^8.47.0",
     "postcss": "^8.4.26",
     "rollup": "^3.26.2",
     "solid-start-node": "^0.3.0",

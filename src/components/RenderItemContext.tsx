@@ -1,6 +1,5 @@
-import { For, JSXElement, createEffect } from "solid-js";
-import { SurveyItem, SurveyProvider, useSurveyContext } from "./surveyStateContext";
-import { setDefaultResultOrder } from "dns";
+import { For, JSXElement } from "solid-js";
+import { SurveyItem, useSurveyContext } from "./surveyStateContext";
 
 export default function RenderItem(props: { item: SurveyItem }) {
 
@@ -9,7 +8,7 @@ export default function RenderItem(props: { item: SurveyItem }) {
     // console.log(context)
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
 
-    const [surveyFormat, getState, setState] = context;
+    const [, getState, setState] = context;
 
     let questionHTML: JSXElement = <></>;
 
@@ -36,12 +35,12 @@ export default function RenderItem(props: { item: SurveyItem }) {
                             // and potentially fix that type error
                             // although that might make it more awkward to setState()
                             checked={getState.responses[props.item.id] === englishChoices[index()]}
-                            onClick={(e) => setState("responses", props.item.id, englishChoices[index()])}
+                            onClick={() => setState("responses", props.item.id, englishChoices[index()])}
                         />
 
                         <label
                             for={props.item.id + englishChoices[index()]}
-                            onClick={(e) => setState("responses", props.item.id, englishChoices[index()])}>
+                            onClick={() => setState("responses", props.item.id, englishChoices[index()])}>
                             {item}
                         </label>
                     </div>

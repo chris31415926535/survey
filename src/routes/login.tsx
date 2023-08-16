@@ -1,7 +1,6 @@
 // NOTE: I used the solidstart template with user auth, but have disabled it all
 
-import { For, Show } from "solid-js";
-import { produce } from "solid-js/store";
+import { Show } from "solid-js";
 import { useParams, useRouteData } from "solid-start";
 import { FormError } from "solid-start/data";
 import {
@@ -101,47 +100,47 @@ export default function Login() {
   return (
     <>
       <main>
-      <h1>Login</h1>
-      <Form>
-        <input
-          type="hidden"
-          name="redirectTo"
-          value={params.redirectTo ?? "/"}
-        />
-        
-        <fieldset>
-          <legend>Login or Register?</legend>
-          
-          <label>
-            <input type="radio" name="loginType" value="login" checked={true} />{" "}
-            Login
-          </label>
-          <label>
-            <input type="radio" name="loginType" value="register" /> Register
-          </label>
-        </fieldset>
-        <div>
-          <label for="username-input">Username</label>
-          <input name="username" placeholder="kody" />
-        </div>
-        <Show when={loggingIn.error?.fieldErrors?.username}>
-          <p role="alert">{loggingIn.error.fieldErrors.username}</p>
-        </Show>
-        <div>
-          <label for="password-input">Password</label>
-          <input name="password" type="password" placeholder="twixrox" />
-        </div>
-        <Show when={loggingIn.error?.fieldErrors?.password}>
-          <p role="alert">{loggingIn.error.fieldErrors.password}</p>
-        </Show>
-        <Show when={loggingIn.error}>
-          <p role="alert" id="error-message">
-            {loggingIn.error.message}
-          </p>
-        </Show>
-        <button type="submit">{data() ? "Login" : ""}</button>
-      </Form>
-    </main>
+        <h1>Login</h1>
+        <Form>
+          <input
+            type="hidden"
+            name="redirectTo"
+            value={params.redirectTo ?? "/"}
+          />
+
+          <fieldset>
+            <legend>Login or Register?</legend>
+
+            <label>
+              <input type="radio" name="loginType" value="login" checked={true} />{" "}
+              Login
+            </label>
+            <label>
+              <input type="radio" name="loginType" value="register" /> Register
+            </label>
+          </fieldset>
+          <div>
+            <label for="username-input">Username</label>
+            <input name="username" placeholder="kody" />
+          </div>
+          <Show when={loggingIn.error?.fieldErrors?.username}>
+            <p role="alert">{loggingIn.error.fieldErrors.username}</p>
+          </Show>
+          <div>
+            <label for="password-input">Password</label>
+            <input name="password" type="password" placeholder="twixrox" />
+          </div>
+          <Show when={loggingIn.error?.fieldErrors?.password}>
+            <p role="alert">{loggingIn.error.fieldErrors.password}</p>
+          </Show>
+          <Show when={loggingIn.error}>
+            <p role="alert" id="error-message">
+              {loggingIn.error.message}
+            </p>
+          </Show>
+          <button type="submit">{data() ? "Login" : ""}</button>
+        </Form>
+      </main>
 
 
     </>

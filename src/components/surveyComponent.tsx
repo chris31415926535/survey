@@ -11,7 +11,7 @@ export const SurveyComponent = () => {
     const context = useSurveyContext();
     if (!context) throw new Error("useSurveyContext: cannot find a SurveyContext")
 
-    const [surveyFormat, getState, setState] = context;
+    const [, getState, setState] = context;
 
     return (<>
         <select name="languages" id="language-select" onChange={
